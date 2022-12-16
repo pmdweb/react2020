@@ -1,34 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState } from "react";
+import { Tweet } from "./componentes/tweets"
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tweets, setTweets] = useState<string[]>([
+    'tweet 1',
+    'tweet 2',
+    'tweet 3',
+    'tweet 4',
+  ])
+  function createTweet() {
+    setTweets([...tweets,'tweet 5'])
+  }
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Teste do Pedro
-      </p>
+    <div>
+      {tweets.map(tweet => {
+        return <Tweet text={tweet } />
+      })}
+
+      <button
+        onClick={createTweet}
+        style={{
+          backgroundColor: "white",
+          border: 0,
+          padding: '6px 12px'
+        }}
+      >
+        add
+      </button>
     </div>
-  )
+  );
 }
 
 export default App
